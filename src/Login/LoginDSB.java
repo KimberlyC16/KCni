@@ -77,6 +77,11 @@ public class LoginDSB extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         endUsers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "USER" }));
+        endUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endUsersActionPerformed(evt);
+            }
+        });
         jPanel2.add(endUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 110, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
@@ -221,6 +226,10 @@ public class LoginDSB extends javax.swing.JFrame {
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userActionPerformed
+
+    private void endUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endUsersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endUsersActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
