@@ -99,6 +99,11 @@ public class RegDSB extends javax.swing.JFrame {
                 userMouseClicked(evt);
             }
         });
+        user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userActionPerformed(evt);
+            }
+        });
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 250, 29));
 
         pass.setFont(new java.awt.Font("Yu Gothic", 1, 11)); // NOI18N
@@ -150,6 +155,11 @@ public class RegDSB extends javax.swing.JFrame {
         jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 250, 29));
 
         endUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "USER" }));
+        endUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endUserActionPerformed(evt);
+            }
+        });
         jPanel1.add(endUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 250, 33));
 
         jButton2.setText("EXIT");
@@ -243,6 +253,14 @@ public class RegDSB extends javax.swing.JFrame {
     private void contactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactActionPerformed
 
     }//GEN-LAST:event_contactActionPerformed
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
+
+    private void endUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endUserActionPerformed
 
     /**
      * @param args the command line arguments

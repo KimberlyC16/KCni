@@ -5,6 +5,8 @@
  */
 package User;
 
+import Login.LoginDSB;
+
 /**
  *
  * @author Personal
