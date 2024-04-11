@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reg;
+package rgstr;
 
 import Admin.AdminDSB;
 import Config.DBConnector;
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class RegDSB extends javax.swing.JFrame {
+public class RgstrDSB extends javax.swing.JFrame {
 
-    public RegDSB() {
+    public RgstrDSB() {
         initComponents();
     }
 
@@ -30,7 +30,7 @@ public class RegDSB extends javax.swing.JFrame {
 
         try (Connection cn = new DBConnector().getConnection()) {
 
-            PreparedStatement checkerStmt = cn.prepareStatement("SELECT COUNT(*) FROM zxcvb WHERE email = ? OR user = ? OR contact = ?");
+            PreparedStatement checkerStmt = cn.prepareStatement("SELECT COUNT(*) FROM libs WHERE email = ? OR usernames = ? OR contact = ?");
             checkerStmt.setString(1, email);
             checkerStmt.setString(2, user);
             checkerStmt.setString(3, contact);
@@ -45,7 +45,7 @@ public class RegDSB extends javax.swing.JFrame {
 
             cn.setAutoCommit(false);
 
-            PreparedStatement insertStmt = cn.prepareStatement("INSERT INTO zxcvb (email,contact,user,pass,status) VALUES (?,?,?,?,'Active')");
+            PreparedStatement insertStmt = cn.prepareStatement("INSERT INTO libs (email,contact,usernames,passwords,status) VALUES (?,?,?,?,'Active')");
             insertStmt.setString(1, email);
             insertStmt.setString(2, contact);
             insertStmt.setString(3, user);
@@ -80,6 +80,7 @@ public class RegDSB extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("REGISTER");
@@ -88,7 +89,7 @@ public class RegDSB extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 91, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 91, -1));
 
         user.setFont(new java.awt.Font("Yu Gothic", 1, 11)); // NOI18N
         user.setForeground(new java.awt.Color(153, 153, 153));
@@ -168,21 +169,21 @@ public class RegDSB extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 91, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 91, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reg/ye.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 550));
+        jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        jLabel1.setText("Library Registration Form");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 300, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
         );
 
         pack();
@@ -194,7 +195,7 @@ public class RegDSB extends javax.swing.JFrame {
         if (contact.getText().length() <= 10) {
             JOptionPane.showMessageDialog(this, "Contact Must Be Atleast 10 Characters!");
         } else if (!email.getText().contains("@gmail.com")) {
-            JOptionPane.showMessageDialog(this, "Email Must Contain @gmail.com! TANGINAMO!");
+            JOptionPane.showMessageDialog(this, "Email Must Contain @gmail.com");
         } else if (pass.getText().length() <= 7) {
             JOptionPane.showMessageDialog(this, "Password Must Be Atleast 7 Characters!");
         } else {
@@ -279,20 +280,21 @@ public class RegDSB extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RgstrDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RgstrDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RgstrDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RgstrDSB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegDSB().setVisible(true);
+                new RgstrDSB().setVisible(true);
             }
         });
     }

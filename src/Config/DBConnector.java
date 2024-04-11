@@ -11,7 +11,7 @@ public class DBConnector {
     final private Connection cn;
     
     public DBConnector() throws SQLException{
-        cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/kits","root","");
+        cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
     }
     
     public ResultSet getData(String sql) throws SQLException{

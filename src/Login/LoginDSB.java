@@ -2,7 +2,7 @@ package Login;
 
 import Admin.AdminDSB;
 import Config.DBConnector;
-import Reg.RegDSB;
+import rgstr.RgstrDSB;
 import User.UserDSB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class LoginDSB extends javax.swing.JFrame {
     public static boolean loginAccount(String username, String password) {
         try (Connection cn = new DBConnector().getConnection()) {
 
-            PreparedStatement checkStmt = cn.prepareStatement("SELECT COUNT(*) FROM zxcvb WHERE user = ? AND pass = ? AND status = 'Active'");
+            PreparedStatement checkStmt = cn.prepareStatement("SELECT COUNT(*) FROM libs WHERE usernames = ? AND passwords = ? AND status = 'Active'");
             checkStmt.setString(1, username);
             checkStmt.setString(2, password);
             ResultSet result = checkStmt.executeQuery();
@@ -38,10 +38,10 @@ public class LoginDSB extends javax.swing.JFrame {
 
         try {
 
-            ResultSet rs = new DBConnector().getData("SELECT * FROM zxcvb");
+            ResultSet rs = new DBConnector().getData("SELECT * FROM libs");
 
             while (rs.next()) {
-                table.addRow(new String[]{rs.getString("id"), rs.getString("email"), rs.getString("contact"), rs.getString("user"), rs.getString("pass"), rs.getString("status")});
+                table.addRow(new String[]{rs.getString("id"), rs.getString("email"), rs.getString("contact"), rs.getString("usernames"), rs.getString("passwords"), rs.getString("status")});
             }
 
         } catch (SQLException er) {
@@ -57,7 +57,6 @@ public class LoginDSB extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         endUsers = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         user = new javax.swing.JTextField();
         pass = new javax.swing.JTextField();
@@ -65,7 +64,6 @@ public class LoginDSB extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,26 +84,16 @@ public class LoginDSB extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel5.setText("Click Here");
+        jLabel5.setText("Click Here to Register");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel3.setText("To Register");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 25)); // NOI18N
-        jLabel1.setText("GRADE TRACKER");
+        jLabel1.setText("Library Management ");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
         user.setFont(new java.awt.Font("Yu Gothic", 1, 11)); // NOI18N
@@ -133,11 +121,16 @@ public class LoginDSB extends javax.swing.JFrame {
                 passMouseClicked(evt);
             }
         });
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 250, 29));
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
+        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 250, 29));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 20)); // NOI18N
         jLabel2.setText("SYSTEM");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 90, 30));
 
         jButton1.setText("EXIT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -157,10 +150,6 @@ public class LoginDSB extends javax.swing.JFrame {
 
         jButton3.setText("LOGIN");
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/fail.jpg"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jTextField3.setFont(new java.awt.Font("Yu Gothic", 1, 11)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(153, 153, 153));
@@ -191,12 +180,8 @@ public class LoginDSB extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3MouseClicked
-
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new RegDSB().setVisible(true);
+        new RgstrDSB().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -206,7 +191,7 @@ public class LoginDSB extends javax.swing.JFrame {
             String selectedUser = (String) endUsers.getSelectedItem();
 
             if ("USER".equals(selectedUser)) {
-                new UserDSB().setVisible(true);
+               new UserDSB().setVisible(true);
                 dispose();
             } else if ("ADMIN".equals(selectedUser)) {
                 new AdminDSB().setVisible(true);
@@ -219,10 +204,6 @@ public class LoginDSB extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel3MouseClicked
-
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userActionPerformed
@@ -230,6 +211,14 @@ public class LoginDSB extends javax.swing.JFrame {
     private void endUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endUsersActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_endUsersActionPerformed
+
+    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3MouseClicked
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -246,8 +235,6 @@ public class LoginDSB extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField3;
