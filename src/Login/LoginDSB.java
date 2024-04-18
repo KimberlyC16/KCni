@@ -2,6 +2,7 @@ package Login;
 
 import Admin.AdminDSB;
 import Config.DBConnector;
+import Config.session;
 import rgstr.RgstrDSB;
 import User.UserDSB;
 import java.sql.Connection;
@@ -18,11 +19,22 @@ public class LoginDSB extends javax.swing.JFrame {
     }
 
     public static boolean loginAccount(String username, String password) {
+        
+        
         try (Connection cn = new DBConnector().getConnection()) {
-
-            PreparedStatement checkStmt = cn.prepareStatement("SELECT COUNT(*) FROM libs WHERE usernames = ? AND passwords = ? AND status = 'Active'");
+     
+            PreparedStatement checkStmt = cn.prepareStatement("SELECT COUNT(*) FROM libs WHERE usernames = ? AND passwords = ? AND status = ?");
             checkStmt.setString(1, username);
             checkStmt.setString(2, password);
+            
+                session sess = session.getInstance();
+                sess.setId("Id");
+                sess.setUsernames("Usernames");
+                sess.setPasswords("Passwords");
+                sess.setEmail("Email");
+                sess.setContact("Contact");
+                sess.setStatus("Status");
+                
             ResultSet result = checkStmt.executeQuery();
             result.next();
             int count = result.getInt(1);
@@ -71,7 +83,7 @@ public class LoginDSB extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(412, 509));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         endUsers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "USER" }));
@@ -162,7 +174,7 @@ public class LoginDSB extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 250, 29));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 510));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 510));
 
         pack();
         setLocationRelativeTo(null);
